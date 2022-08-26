@@ -3,6 +3,7 @@ module Oscars
 using Stipple
 using StippleUI
 using StipplePlotly
+using PlotlyBase
 using SQLite
 using DataFrames
 using MultivariateStats, CSV
@@ -108,7 +109,6 @@ function plot_data_2()
 end
 
 function plot_data(df)
-  [
     PlotData(
       x = df.Runtime,
       y = df.Oscars,
@@ -116,16 +116,7 @@ function plot_data(df)
       text = string.(df.Title, " (", df.Year, ")"),
       mode = "markers",
       plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER,
-    ),
-    PlotData(
-      x = df.Runtime,
-      y = (x->length(findall(',', x))).(df.Cast),
-      name = "number of casts",
-      text = string.(df.Title, " (", df.Year, ")"),
-      mode = "markers",
-      plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
     )
-  ]
 end
 
 function plot_data_2(df)
@@ -165,9 +156,13 @@ export Oscar
   movies_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
   movies_selection::R{DataTableSelection} = DataTableSelection()
   selected_movie::R{Dict} = selected_movie()
-  data::R{Vector{PlotData}} = [plot_data()]
-  another_data::R{Vector{PlotData}} = [plot_data()]
+  data::R{Vector{PlotData}} = [plot_data(),plot_data_2()]
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
+  
+  one_way_traces::R{Vector{Charts.PlotData}} = [plot_data_2()]
+  one_way_layout::R{PlotlyBase.Layout} = PlotlyBase.Layout()
+  one_way_config::R{PlotlyBase.PlotConfig} = PlotlyBase.PlotConfig()
+
   @mixin data::PlotlyEvents
 end
 
@@ -185,7 +180,7 @@ function handlers(model::Oscar)
     #  "`Director` like '%$(ALL)%'",
       "`Cast` like '%$(fca)%'"
     ] |> validvalue |> oscars, table_options)
-    model.data[] = plot_data(model.movies.data)
+    model.data[] = [plot_data(model.movies.data),plot_data_2()]
     model.layout[] = plot_layout("Runtime [min]", "Number")
     model.isprocessing[] = false
   end
