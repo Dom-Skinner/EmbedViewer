@@ -195,9 +195,7 @@ function handlers(model::Oscar)
   end
 
   on(model.data_hover) do data
-    isempty(data) && return
-    n = data["points"][1]["pointIndex"] + 1
-    model.selected_movie[] = rowselection(model.movies[], n)[1]
+    return
   end
 
   on(model.movies_selection) do selection
