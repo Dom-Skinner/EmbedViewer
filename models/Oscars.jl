@@ -156,8 +156,10 @@ export Oscar
   filter_director::R{String} = ALL
   filter_cast::R{String} = ALL
   countries::Vector{<:String} = movie_data("Country")
-  genres::Vector{<:String} = movie_data("Genre")
-  directors::Vector{<:String} = movie_data("Director")
+  #genres::Vector{<:String} = movie_data("Genre")
+  genres::Vector{<:String} = movie_data("Country")
+  #directors::Vector{<:String} = movie_data("Director")
+  directors::Vector{<:String} = movie_data("Country")
   cast::Vector{<:String} = movie_data("Cast")
   movies::R{DataTable} = DataTable(oscars(), table_options)
   movies_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
