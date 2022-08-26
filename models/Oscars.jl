@@ -49,6 +49,7 @@ end
 
 #const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Genre", "Director", "Cast"]))
 const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Cast"]))
+const multi_table_options = DataTableOptions(columns = Column(["System name", "Number of points"]))
 
 # prepare the options for the various select inputs, using the data from the db
 function movie_data(column)
@@ -73,6 +74,11 @@ function oscars(filters::Vector{<:String} = String[])
   # @debug query
 
   DBInterface.execute(db, query) |> DataFrame
+end
+
+function filtered_systems()
+  ## will eventually return a filtered version of db_multi
+  return db_multi
 end
 
 # picks a random movie - should be replaced by the movie selected from the UI #TODO
@@ -152,9 +158,15 @@ export Oscar
   #directors::Vector{<:String} = movie_data("Director")
   directors::Vector{<:String} = movie_data("Country")
   cast::Vector{<:String} = movie_data("Cast")
+  
   movies::R{DataTable} = DataTable(oscars(), table_options)
   movies_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
   movies_selection::R{DataTableSelection} = DataTableSelection()
+
+  multi_systems::R{DataTable} = DataTable(filtered_systems(),multi_table_options)
+  multi_systems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
+  multi_systems_selection::R{DataTableSelection} = DataTableSelection()
+
   selected_movie::R{Dict} = selected_movie()
   data::R{Vector{PlotData}} = [plot_data()]
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
