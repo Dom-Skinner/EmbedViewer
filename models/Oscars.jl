@@ -156,7 +156,7 @@ export Oscar
   movies_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
   movies_selection::R{DataTableSelection} = DataTableSelection()
   selected_movie::R{Dict} = selected_movie()
-  data::R{Vector{PlotData}} = [plot_data(),plot_data_2()]
+  data::R{Vector{PlotData}} = [plot_data()]
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
   one_way_traces::R{Vector{Charts.PlotData}} = [plot_data_2()]
@@ -180,7 +180,8 @@ function handlers(model::Oscar)
     #  "`Director` like '%$(ALL)%'",
       "`Cast` like '%$(fca)%'"
     ] |> validvalue |> oscars, table_options)
-    model.data[] = [plot_data(model.movies.data),plot_data_2()]
+    model.data[] = [plot_data(model.movies.data)]
+    model.one_way_traces[] = [plot_data_2(model.movies.data)]
     model.layout[] = plot_layout("Runtime [min]", "Number")
     model.isprocessing[] = false
   end
