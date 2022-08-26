@@ -177,8 +177,8 @@ function handlers(model::Oscar)
       "`Oscars` >= '$(fo)'",
       "`Year` between '$(fy.range.start)' and '$(fy.range.stop)'",
       "`Country` like '%$(fc)%'",
-      "`Genre` like '%$(fg)%'",
-      "`Director` like '%$(ALL)%'",
+    #  "`Genre` like '%$(fg)%'",
+    #  "`Director` like '%$(ALL)%'",
       "`Cast` like '%$(fca)%'"
     ] |> validvalue |> oscars, table_options)
     model.data[] = plot_data(model.movies.data)
