@@ -46,7 +46,8 @@ const years_range = begin
   UnitRange(result[!,:min_year][1], result[!,:max_year][1])
 end
 
-const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Genre", "Director", "Cast"]))
+#const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Genre", "Director", "Cast"]))
+const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Cast"]))
 
 # prepare the options for the various select inputs, using the data from the db
 function movie_data(column)
