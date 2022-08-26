@@ -127,10 +127,10 @@ end
 
 function plot_data_2(df)
   PlotData(
-      x = df.Runtime,
-      y = (x->length(findall(',', x))).(df.Cast),
+      x = df[:,"Number of points"],
+      y = df[:,"Number of cells per point (approx)"],
       name = "number of casts",
-      text = string.(df.Title, " (", df.Year, ")"),
+      text = df[:,"System name"],
       mode = "markers",
       plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
     )
@@ -193,7 +193,8 @@ function handlers(model::Oscar)
       "`Cast` like '%$(fca)%'"
     ] |> validvalue |> oscars, table_options)
     model.data[] = [plot_data(model.movies.data)]
-    model.one_way_traces[] = [plot_data_2(model.movies.data)]
+    #model.one_way_traces[] = [plot_data_2()]
+    model.one_way_traces[] = [plot_data_2(model.multi_systems.data)]
     model.layout[] = plot_layout("Runtime [min]", "Number")
     model.isprocessing[] = false
   end
