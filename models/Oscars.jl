@@ -93,12 +93,12 @@ end
 
 # picks a random movie - should be replaced by the movie selected from the UI #TODO
 function selected_movie()
-  result = DBInterface.execute(db, "select * from movies order by random() limit 1") |> DataFrame
+  #result = DBInterface.execute(db, "select * from movies order by random() limit 1") |> DataFrame
   data = Dict{String,Any}()
-  for col in names(result)
-    val = result[1,col]
-    data[col] = isa(val, Missing) ? "" : val
-  end
+  #for col in names(result)
+  #  val = result[1,col]
+  #  data[col] = isa(val, Missing) ? "" : val
+  #end
   data
 end
 
@@ -109,41 +109,10 @@ end
 
 # processes the plot's data based on filters
 function plot_data()
-  PlotData( x = (years_range.start:years_range.stop),
+  PlotData( x = (1:10),
             y = (1:10),
-            name = "Oscars by year",
             plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
           )
-end
-
-function plot_data_2()
-  PlotData( x = (years_range.start:years_range.stop),
-            y = (2:11),
-            name = "Oscars by year",
-            plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
-          )
-end
-
-function plot_data(df)
-    PlotData(
-      x = df.Runtime,
-      y = df.Oscars,
-      name = "number of Oscars",
-      text = string.(df.Title, " (", df.Year, ")"),
-      mode = "markers",
-      plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER,
-    )
-end
-
-function plot_data_2(df)
-  PlotData(
-      x = df[:,"Number of points"],
-      y = df[:,"Number of cells per point (approx)"],
-      name = "number of casts",
-      text = df[:,"System name"],
-      mode = "markers",
-      plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
-    )
 end
 
 function plot_data_MDS(mds_coord,text_names)
@@ -153,17 +122,6 @@ function plot_data_MDS(mds_coord,text_names)
       name = "number of casts",
       mode = "markers",
       text = text_names,
-      plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
-    )
-end
-
-function plot_data_3(df)
-  PlotData(
-      x = df[:,"Number of points"].^2,
-      y = df[:,"Number of cells per point (approx)"],
-      name = "number of casts",
-      text = df[:,"System name"],
-      mode = "markers",
       plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
     )
 end
@@ -205,7 +163,7 @@ export Oscar
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
   
-  one_way_traces::R{Vector{PlotData}} = [plot_data_2()]
+  one_way_traces::R{Vector{PlotData}} = [plot_data()]
   one_way_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
 
   @mixin data::PlotlyEvents
