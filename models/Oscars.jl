@@ -204,11 +204,9 @@ export Oscar
   data::R{Vector{PlotData}} = [plot_data()]
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
-  #one_way_traces::R{Vector{Charts.PlotData}} = [plot_data_2()]
-  #one_way_layout::R{PlotlyBase.Layout} = PlotlyBase.Layout()
+  
   one_way_traces::R{Vector{PlotData}} = [plot_data_2()]
   one_way_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
-  #one_way_config::R{PlotlyBase.PlotConfig} = PlotlyBase.PlotConfig()
 
   @mixin data::PlotlyEvents
 
@@ -229,7 +227,7 @@ function handlers(model::Oscar)
     #  "`Director` like '%$(ALL)%'",
       "`Cast` like '%$(fca)%'"
     ] |> validvalue |> oscars, table_options)
-    model.data[] = [plot_data_3(model.multi_systems.data)]
+    
     #model.one_way_traces[] = [plot_data_2()]
     ii = union(getindex.(msel, "__id"))
     if length(ii) == 0
@@ -239,7 +237,8 @@ function handlers(model::Oscar)
     MDS_coords = permutedims(MultivariateStats.transform(MultivariateStats.fit(MDS,
         Matrix(d_mat_r), maxoutdim=3, distances=true)))
     #model.one_way_traces[] = [plot_data_2(model.multi_systems.data[ii,:])]
-    model.one_way_traces[] = [plot_data_MDS(MDS_coords,text_names)]
+    model.data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names)]
+    model.one_way_traces[] = [plot_data_MDS(MDS_coords[:,2:3],text_names)]
     #model.one_way_layout[] = plot_layout("MDS PC1", "MDS PC2")
     model.layout[] = plot_layout("Runtime [min]", "Number")
     model.isprocessing[] = false
