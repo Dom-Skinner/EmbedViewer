@@ -160,8 +160,8 @@ export Oscar
   cast::Vector{<:String} = movie_data("Cast")
   
   movies::R{DataTable} = DataTable(oscars(), table_options)
-  movies_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
-  movies_selection::R{DataTableSelection} = DataTableSelection()
+  #movies_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
+  #movies_selection::R{DataTableSelection} = DataTableSelection()
 
   multi_systems::R{DataTable} = DataTable(filtered_systems(),multi_table_options)
   multi_systems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
@@ -210,14 +210,6 @@ function handlers(model::Oscar)
 
   on(model.data_hover) do data
     return
-  end
-
-  on(model.movies_selection) do selection
-      ii = union(getindex.(selection, "__id")) .- 1
-      for n in 1:length(model.data[])
-        model["data[$n-1].selectedpoints"] = isempty(ii) ? nothing : ii
-      end
-      notify(model, js"data")
   end
 
   model
