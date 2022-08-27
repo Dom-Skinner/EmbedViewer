@@ -204,11 +204,15 @@ export Oscar
   data::R{Vector{PlotData}} = [plot_data()]
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
-  one_way_traces::R{Vector{Charts.PlotData}} = [plot_data_2()]
-  one_way_layout::R{PlotlyBase.Layout} = PlotlyBase.Layout()
-  one_way_config::R{PlotlyBase.PlotConfig} = PlotlyBase.PlotConfig()
+  #one_way_traces::R{Vector{Charts.PlotData}} = [plot_data_2()]
+  #one_way_layout::R{PlotlyBase.Layout} = PlotlyBase.Layout()
+  one_way_traces::R{Vector{PlotData}} = [plot_data_2()]
+  one_way_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
+  #one_way_config::R{PlotlyBase.PlotConfig} = PlotlyBase.PlotConfig()
 
   @mixin data::PlotlyEvents
+
+  @mixin one_way_traces::PlotlyEvents
 end
 
 Stipple.js_mounted(::Oscar) = watchplots()
