@@ -51,6 +51,16 @@ end
 const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Cast"]))
 const multi_table_options = DataTableOptions(columns = Column(["System name", "Number of points"]))
 
+function replace_names(text_name)
+  idx = findfirst(occursin.(db_multi[:,"Search word"],text_name))
+  return db_multi[idx,"System name"]
+end
+function restricted_distance_matrix(ii)
+  key_words  = db_multi[ii,"Search word"]
+  idx_keep = [any(occursin.(key_words, n)) for n in names(d_mat)]
+  text_names = names(d_mat)[idx_keep]
+  return d_mat[idx_keep,idx_keep], replace_names.(text_names)
+end
 # prepare the options for the various select inputs, using the data from the db
 function movie_data(column)
   result = DBInterface.execute(db, "select distinct(`$column`) from movies") |> DataFrame
@@ -136,6 +146,17 @@ function plot_data_2(df)
     )
 end
 
+function plot_data_MDS(mds_coord,text_names)
+  PlotData(
+      x = mds_coord[:,1],
+      y = mds_coord[:,2],
+      name = "number of casts",
+      mode = "markers",
+      text = text_names,
+      plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
+    )
+end
+
 function plot_data_3(df)
   PlotData(
       x = df[:,"Number of points"].^2,
@@ -206,11 +227,15 @@ function handlers(model::Oscar)
     model.data[] = [plot_data_3(model.multi_systems.data)]
     #model.one_way_traces[] = [plot_data_2()]
     ii = union(getindex.(msel, "__id"))
-    if length(ii) > 0
-      model.one_way_traces[] = [plot_data_2(model.multi_systems.data[ii,:])]
-    else
-      model.one_way_traces[] = [plot_data_2(model.multi_systems.data)]
+    if length(ii) == 0
+      ii = 1:size(db_multi)[1]
     end
+    d_mat_r, text_names = restricted_distance_matrix(ii)
+    println(text_names)
+    MDS_coords = permutedims(MultivariateStats.transform(MultivariateStats.fit(MDS,
+        Matrix(d_mat_r), maxoutdim=3, distances=true)))
+    #model.one_way_traces[] = [plot_data_2(model.multi_systems.data[ii,:])]
+    model.one_way_traces[] = [plot_data_MDS(MDS_coords,text_names)]
     model.layout[] = plot_layout("Runtime [min]", "Number")
     model.isprocessing[] = false
   end
