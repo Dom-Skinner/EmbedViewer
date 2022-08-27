@@ -1,5 +1,5 @@
 <header class="st-header q-pa-sm">
-    <h1 class="st-header__title text-h3">Oscars Explorer<br /></h1>
+    <h1 class="st-header__title text-h3">Topological multicellular systems<br /></h1>
 </header>
 <div class="row">
     <div class="col col-6 col-sm">
@@ -13,27 +13,5 @@
     <div class="col col-8">
         <!--<q-table flat="" :columns="movies.columns_movies" selection="multiple" :selected.sync="movies_selection" :data="movies.data_movies" dense="" row-key="__id" :pagination="movies_pagination" class="movies_table"></q-table>-->
         <q-table flat="" :columns="multi_systems.columns_multi_systems" selection="multiple" :selected.sync="multi_systems_selection" :data="multi_systems.data_multi_systems" dense="" row-key="__id" :pagination="multi_systems_pagination" class="multi_systems_table"></q-table>
-    </div>
-    <div class="col col-3">
-        <h2>Filters<br /></h2>
-        <div class="row">
-            <div class="col col-12">
-                <h6>Min number of Oscars</h6>
-                <q-slider :min="$(Oscars.oscars_range.start)" :max="$(Oscars.oscars_range.stop)" v-model="filter_oscars" markers="" label="" label-always="" snap="">
-                </q-slider>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-12">
-                <h6>Year released</h6>
-                <q-range :min="$(Oscars.years_range.start)" :max="$(Oscars.years_range.stop)" :step="5" v-model="filter_years" markers="" label="" label-always="" snap=""></q-range>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col col-12">
-                <q-select :options="countries" label="Country" v-model="filter_country" :loading="isprocessing" :readonly="isprocessing" value="$(Oscars.ALL)"></q-select>
-            </div>
-        </div>
-        <q-select :options="cast" label="Cast" v-model="filter_cast" :loading="isprocessing" :readonly="isprocessing" value="$(Oscars.ALL)"></q-select>
     </div>
 </div>

@@ -219,14 +219,14 @@ function handlers(model::Oscar)
   #onany(model.filter_oscars, model.filter_years, model.filter_country, model.filter_genre, model.filter_director, model.filter_cast, model.isready) do fo, fy, fc, fg, fd, fca, i
   onany(model.filter_oscars, model.filter_years, model.filter_country, model.filter_cast, model.multi_systems_selection, model.isready) do fo, fy, fc, fca, msel, i
     model.isprocessing[] = true
-    model.movies[] = DataTable(String[
-      "`Oscars` >= '$(fo)'",
-      "`Year` between '$(fy.range.start)' and '$(fy.range.stop)'",
-      "`Country` like '%$(fc)%'",
+   # model.movies[] = DataTable(String[
+   #   "`Oscars` >= '$(fo)'",
+   #   "`Year` between '$(fy.range.start)' and '$(fy.range.stop)'",
+   #   "`Country` like '%$(fc)%'",
     #  "`Genre` like '%$(fg)%'",
     #  "`Director` like '%$(ALL)%'",
-      "`Cast` like '%$(fca)%'"
-    ] |> validvalue |> oscars, table_options)
+    #  "`Cast` like '%$(fca)%'"
+    #] |> validvalue |> oscars, table_options)
     
     #model.one_way_traces[] = [plot_data_2()]
     ii = union(getindex.(msel, "__id"))
@@ -240,7 +240,8 @@ function handlers(model::Oscar)
     model.data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names)]
     model.one_way_traces[] = [plot_data_MDS(MDS_coords[:,2:3],text_names)]
     #model.one_way_layout[] = plot_layout("MDS PC1", "MDS PC2")
-    model.layout[] = plot_layout("Runtime [min]", "Number")
+    model.layout[] = plot_layout("MDS PC1", "MDS PC2")
+    model.one_way_layout[] = plot_layout("MDS PC2", "MDS PC3")
     model.isprocessing[] = false
   end
 
