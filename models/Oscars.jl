@@ -171,7 +171,8 @@ end
 function plot_layout(xtitle, ytitle)
   PlotLayout(
     xaxis = [PlotLayoutAxis(title = xtitle)],
-    yaxis = [PlotLayoutAxis(xy = "y", title = ytitle)]
+    yaxis = [PlotLayoutAxis(xy = "y", title = ytitle)]#,
+    #scaleanchor = "x"
   )
 end
 
@@ -231,11 +232,11 @@ function handlers(model::Oscar)
       ii = 1:size(db_multi)[1]
     end
     d_mat_r, text_names = restricted_distance_matrix(ii)
-    println(text_names)
     MDS_coords = permutedims(MultivariateStats.transform(MultivariateStats.fit(MDS,
         Matrix(d_mat_r), maxoutdim=3, distances=true)))
     #model.one_way_traces[] = [plot_data_2(model.multi_systems.data[ii,:])]
     model.one_way_traces[] = [plot_data_MDS(MDS_coords,text_names)]
+    #model.one_way_layout[] = plot_layout("MDS PC1", "MDS PC2")
     model.layout[] = plot_layout("Runtime [min]", "Number")
     model.isprocessing[] = false
   end
