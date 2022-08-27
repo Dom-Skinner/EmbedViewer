@@ -179,18 +179,18 @@ end
 export Oscar
 
 @reactive mutable struct Oscar <: ReactiveModel
-  filter_oscars::R{Int} = oscars_range.start
-  filter_years::R{RangeData{Int}} = RangeData(years_range.start:years_range.stop)
-  filter_country::R{String} = ALL
-  filter_genre::R{String} = ALL
-  filter_director::R{String} = ALL
-  filter_cast::R{String} = ALL
-  countries::Vector{<:String} = movie_data("Country")
+  #filter_oscars::R{Int} = oscars_range.start
+  #filter_years::R{RangeData{Int}} = RangeData(years_range.start:years_range.stop)
+  #filter_country::R{String} = ALL
+  #filter_genre::R{String} = ALL
+  #filter_director::R{String} = ALL
+  #filter_cast::R{String} = ALL
+  #countries::Vector{<:String} = movie_data("Country")
   #genres::Vector{<:String} = movie_data("Genre")
-  genres::Vector{<:String} = movie_data("Country")
+  #genres::Vector{<:String} = movie_data("Country")
   #directors::Vector{<:String} = movie_data("Director")
-  directors::Vector{<:String} = movie_data("Country")
-  cast::Vector{<:String} = movie_data("Cast")
+  #directors::Vector{<:String} = movie_data("Country")
+  #cast::Vector{<:String} = movie_data("Cast")
   
   movies::R{DataTable} = DataTable(oscars(), table_options)
   #movies_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
@@ -245,9 +245,9 @@ function handlers(model::Oscar)
     model.isprocessing[] = false
   end
 
-  on(model.data_selected) do data
-    selectrows!(model, :movies, getindex.(data["points"], "pointIndex") .+ 1)
-  end
+  #on(model.data_selected) do data
+  #  selectrows!(model, :movies, getindex.(data["points"], "pointIndex") .+ 1)
+  #end
 
   on(model.data_hover) do data
     return
