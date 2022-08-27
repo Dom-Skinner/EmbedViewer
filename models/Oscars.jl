@@ -182,7 +182,7 @@ Stipple.js_mounted(::Oscar) = watchplots()
 
 function handlers(model::Oscar)
   #onany(model.filter_oscars, model.filter_years, model.filter_country, model.filter_genre, model.filter_director, model.filter_cast, model.isready) do fo, fy, fc, fg, fd, fca, i
-  onany(model.filter_oscars, model.filter_years, model.filter_country, model.filter_cast, model.isready) do fo, fy, fc, fca, i
+  onany(model.filter_oscars, model.filter_years, model.filter_country, model.filter_cast, model.multi_systems_selection, model.isready) do fo, fy, fc, fca, msel, i
     model.isprocessing[] = true
     model.movies[] = DataTable(String[
       "`Oscars` >= '$(fo)'",
@@ -194,7 +194,12 @@ function handlers(model::Oscar)
     ] |> validvalue |> oscars, table_options)
     model.data[] = [plot_data(model.movies.data)]
     #model.one_way_traces[] = [plot_data_2()]
-    model.one_way_traces[] = [plot_data_2(model.multi_systems.data)]
+    ii = union(getindex.(msel, "__id"))
+    if length(ii) > 0
+      model.one_way_traces[] = [plot_data_2(model.multi_systems.data[ii,:])]
+    else
+      model.one_way_traces[] = [plot_data_2(model.multi_systems.data)]
+    end
     model.layout[] = plot_layout("Runtime [min]", "Number")
     model.isprocessing[] = false
   end
