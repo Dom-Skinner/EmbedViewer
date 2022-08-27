@@ -7,6 +7,8 @@ using PlotlyBase
 using SQLite
 using DataFrames
 using MultivariateStats, CSV
+import Colors
+import ColorSchemes
 
 const ALL = "All"
 const db = SQLite.DB(joinpath("data", "oscars.db"))
@@ -111,6 +113,7 @@ function plot_data_MDS(mds_coord,text_names)
       name = "number of casts",
       mode = "markers",
       text = text_names,
+      marker = Dict(:color => "#" .* Colors.hex.(ColorSchemes.rainbow[rand(length(mds_coord[:,1]))])),
       plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
     )
 end
