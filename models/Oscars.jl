@@ -16,25 +16,29 @@ const db = SQLite.DB(joinpath("data", "oscars.db"))
 db_multi = DataFrame()
 db_multi[!,"System name"] = ["Hypothalamus","White Matter", "Telencephalon","Diencephalon","Mesencephalon",
                         "Olfactory Epithelium","Metencephalon", "Mylencephalon","Spinal Cord", 
-                        "Zebrafish Embryo", "E. coli", "P. aeruginosa", "S. enterica", "V. cholerae", 
+                         "E. coli", "P. aeruginosa", "S. enterica", "V. cholerae", "Zebrafish Embryo",
                         "D. melongaster", "P. mammillata", "Cancer organoid", "C. elegans", 
                         "Diffusion limited aggregation", "Sphere packing", "1:1:4 ellipsoids", 
                         "1:4:4: ellipsoids", "1:2:3: ellipsoids", "Polydisperse packing", "Glassy material", 
                         "Star positions", "Poisson-Voronoi"]
-db_multi[!,"Number of points"] = vcat(ones(9),6,5,5,5,5,14,1,1,1,5*ones(6),3,1,5)
+db_multi[!,"Number of points"] = vcat(ones(9),5,5,5,5,10,14,1,1,1,5*ones(6),3,1,5)
 db_multi[!,"Number of cells per point (approx)"] = vcat(5_000,20_000,35_000,12_500,90_000,7_500,150_000,25_000,7_500,14_000,18_000*ones(4),20_000,43_500,3_200,2_100,10_000*ones(6),4096,110_000,10_000)
 
 #TODO fix zebrafish region numbering
-db_multi[!,"Search word"] = ["zebrafish_region_1","zebrafish_region_1", "zebrafish_region_1","zebrafish_region_1","zebrafish_region_1",
-                        "zebrafish_region_1","zebrafish_region_8", "zebrafish_region_9","Spinal Cord", 
-                        "zebrafish_embryo", "ecoli", "pseudomonas", "salmonella", "vibrio", 
-                        "fly_embryo", "ascidian", "Guo_organoid", "worm", 
-                        "DLA", "PackedSpheres", "PackedEllipses", 
+db_multi[!,"Search word"] = ["zebrafish_region_2","zebrafish_region_3", "zebrafish_region_4","zebrafish_region_5","zebrafish_region_6",
+                        "zebrafish_region_7","zebrafish_region_8", "zebrafish_region_9","zebrafish_region_10",
+                        "ecoli", "pseudomonas", "salmonella", "vibrio",  "zebrafish_embryo",
+                        "fly_embryo","worm",  "ascidian", "Guo_organoid", 
+                         "PackedSpheres", "PackedEllipses", "DLA",
                         "PackedMandM", "PackedIreg", "PolySpheres", "Glassy", 
                         "HYGStarDatabase", "PV/PV"]
 
 d_mat = CSV.read(joinpath("data", "total_distance_compute.txt"), DataFrame)
 
+const color_vec = vcat("#CAB3D7","#A7CEE2", "#2279B5", "#B3D88B", "#37A048", "#F57F20", "#F6999A", "#E12028", "#FDBF6E",
+                    repeat(["#EC523F"],5),repeat(["#40A44A"],5),repeat(["#B276B2"],5),repeat(["#AB8E30"],5),repeat(["#4275B5"],10),
+                    repeat(["#F47A51"],14),"#FFDE17", "#FDBF6D", "#2279B5", repeat(["#E12028","#37A048","#F57F20","#2279B5","#952768"],5),
+                    repeat(["#942768"],5),repeat(["#E12028"],3),"#8E9738",repeat(["#8E9838"],5))
 register_mixin(@__MODULE__)
 
 # construct a range between the minimum and maximum number of oscars
@@ -61,7 +65,7 @@ function restricted_distance_matrix(ii)
   key_words  = db_multi[ii,"Search word"]
   idx_keep = [any(occursin.(key_words, n)) for n in names(d_mat)]
   text_names = names(d_mat)[idx_keep]
-  return d_mat[idx_keep,idx_keep], replace_names.(text_names)
+  return d_mat[idx_keep,idx_keep], replace_names.(text_names), color_vec[idx_keep]
 end
 # prepare the options for the various select inputs, using the data from the db
 function movie_data(column)
@@ -106,14 +110,14 @@ function plot_data()
           )
 end
 
-function plot_data_MDS(mds_coord,text_names)
+function plot_data_MDS(mds_coord,text_names,cvec)
   PlotData(
       x = mds_coord[:,1],
       y = mds_coord[:,2],
       name = "number of casts",
       mode = "markers",
       text = text_names,
-      marker = Dict(:color => "#" .* Colors.hex.(ColorSchemes.rainbow[rand(length(mds_coord[:,1]))])),
+      marker = Dict(:color => cvec),
       plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
     )
 end
@@ -160,12 +164,12 @@ function handlers(model::Oscar)
     if length(ii) == 0
       ii = 1:size(db_multi)[1]
     end
-    d_mat_r, text_names = restricted_distance_matrix(ii)
+    d_mat_r, text_names, cvec = restricted_distance_matrix(ii)
     MDS_coords = permutedims(MultivariateStats.transform(MultivariateStats.fit(MDS,
         Matrix(d_mat_r), maxoutdim=3, distances=true)))
     
-    model.data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names)]
-    model.one_way_traces[] = [plot_data_MDS(MDS_coords[:,2:3],text_names)]
+    model.data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names,cvec)]
+    model.one_way_traces[] = [plot_data_MDS(MDS_coords[:,2:3],text_names,cvec)]
     
     model.layout[] = plot_layout("MDS PC1", "MDS PC2")
     model.one_way_layout[] = plot_layout("MDS PC2", "MDS PC3")
