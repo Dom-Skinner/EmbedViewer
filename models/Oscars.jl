@@ -217,7 +217,7 @@ Stipple.js_mounted(::Oscar) = watchplots()
 
 function handlers(model::Oscar)
   #onany(model.filter_oscars, model.filter_years, model.filter_country, model.filter_genre, model.filter_director, model.filter_cast, model.isready) do fo, fy, fc, fg, fd, fca, i
-  onany(model.filter_oscars, model.filter_years, model.filter_country, model.filter_cast, model.multi_systems_selection, model.isready) do fo, fy, fc, fca, msel, i
+  onany(model.multi_systems_selection, model.isready) do msel, i
     model.isprocessing[] = true
    # model.movies[] = DataTable(String[
    #   "`Oscars` >= '$(fo)'",
