@@ -136,6 +136,17 @@ function plot_data_2(df)
     )
 end
 
+function plot_data_3(df)
+  PlotData(
+      x = df[:,"Number of points"].^2,
+      y = df[:,"Number of cells per point (approx)"],
+      name = "number of casts",
+      text = df[:,"System name"],
+      mode = "markers",
+      plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
+    )
+end
+
 function plot_layout(xtitle, ytitle)
   PlotLayout(
     xaxis = [PlotLayoutAxis(title = xtitle)],
@@ -192,7 +203,7 @@ function handlers(model::Oscar)
     #  "`Director` like '%$(ALL)%'",
       "`Cast` like '%$(fca)%'"
     ] |> validvalue |> oscars, table_options)
-    model.data[] = [plot_data(model.movies.data)]
+    model.data[] = [plot_data_3(model.multi_systems.data)]
     #model.one_way_traces[] = [plot_data_2()]
     ii = union(getindex.(msel, "__id"))
     if length(ii) > 0
