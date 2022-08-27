@@ -91,17 +91,6 @@ function filtered_systems()
   return db_multi
 end
 
-# picks a random movie - should be replaced by the movie selected from the UI #TODO
-function selected_movie()
-  #result = DBInterface.execute(db, "select * from movies order by random() limit 1") |> DataFrame
-  data = Dict{String,Any}()
-  #for col in names(result)
-  #  val = result[1,col]
-  #  data[col] = isa(val, Missing) ? "" : val
-  #end
-  data
-end
-
 # checks if the filter is a value from db of placeholder "All"
 function validvalue(filters::Vector{<:String})
   [endswith(f, "'%$(ALL)%'") || endswith(f, "'%%'") ? "" : f for f in filters]
@@ -137,28 +126,14 @@ end
 export Oscar
 
 @reactive mutable struct Oscar <: ReactiveModel
-  #filter_oscars::R{Int} = oscars_range.start
-  #filter_years::R{RangeData{Int}} = RangeData(years_range.start:years_range.stop)
-  #filter_country::R{String} = ALL
-  #filter_genre::R{String} = ALL
-  #filter_director::R{String} = ALL
-  #filter_cast::R{String} = ALL
-  #countries::Vector{<:String} = movie_data("Country")
-  #genres::Vector{<:String} = movie_data("Genre")
-  #genres::Vector{<:String} = movie_data("Country")
-  #directors::Vector{<:String} = movie_data("Director")
-  #directors::Vector{<:String} = movie_data("Country")
-  #cast::Vector{<:String} = movie_data("Cast")
   
   movies::R{DataTable} = DataTable(oscars(), table_options)
-  #movies_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
-  #movies_selection::R{DataTableSelection} = DataTableSelection()
 
   multi_systems::R{DataTable} = DataTable(filtered_systems(),multi_table_options)
   multi_systems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
   multi_systems_selection::R{DataTableSelection} = DataTableSelection()
 
-  selected_movie::R{Dict} = selected_movie()
+  selected_movie::R{Dict} = Dict{String,Any}()
   data::R{Vector{PlotData}} = [plot_data()]
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
@@ -174,19 +149,10 @@ end
 Stipple.js_mounted(::Oscar) = watchplots()
 
 function handlers(model::Oscar)
-  #onany(model.filter_oscars, model.filter_years, model.filter_country, model.filter_genre, model.filter_director, model.filter_cast, model.isready) do fo, fy, fc, fg, fd, fca, i
+  
   onany(model.multi_systems_selection, model.isready) do msel, i
     model.isprocessing[] = true
-   # model.movies[] = DataTable(String[
-   #   "`Oscars` >= '$(fo)'",
-   #   "`Year` between '$(fy.range.start)' and '$(fy.range.stop)'",
-   #   "`Country` like '%$(fc)%'",
-    #  "`Genre` like '%$(fg)%'",
-    #  "`Director` like '%$(ALL)%'",
-    #  "`Cast` like '%$(fca)%'"
-    #] |> validvalue |> oscars, table_options)
-    
-    #model.one_way_traces[] = [plot_data_2()]
+
     ii = union(getindex.(msel, "__id"))
     if length(ii) == 0
       ii = 1:size(db_multi)[1]
@@ -194,18 +160,14 @@ function handlers(model::Oscar)
     d_mat_r, text_names = restricted_distance_matrix(ii)
     MDS_coords = permutedims(MultivariateStats.transform(MultivariateStats.fit(MDS,
         Matrix(d_mat_r), maxoutdim=3, distances=true)))
-    #model.one_way_traces[] = [plot_data_2(model.multi_systems.data[ii,:])]
+    
     model.data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names)]
     model.one_way_traces[] = [plot_data_MDS(MDS_coords[:,2:3],text_names)]
-    #model.one_way_layout[] = plot_layout("MDS PC1", "MDS PC2")
+    
     model.layout[] = plot_layout("MDS PC1", "MDS PC2")
     model.one_way_layout[] = plot_layout("MDS PC2", "MDS PC3")
     model.isprocessing[] = false
   end
-
-  #on(model.data_selected) do data
-  #  selectrows!(model, :movies, getindex.(data["points"], "pointIndex") .+ 1)
-  #end
 
   on(model.data_hover) do data
     return
