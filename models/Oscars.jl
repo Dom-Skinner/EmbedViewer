@@ -70,17 +70,6 @@ const color_dict = Dict("White Matter"=>"#A6CEE2",
 
 register_mixin(@__MODULE__)
 
-# construct a range between the minimum and maximum number of oscars
-const oscars_range = begin
-  result = DBInterface.execute(db, "select min(Oscars) as min_oscars, max(Oscars) as max_oscars from movies") |> DataFrame
-  UnitRange(result[!,:min_oscars][1], result[!,:max_oscars][1])
-end
-
-# construct a range between the minimum and maximim years of the movies
-const years_range = begin
-  result = DBInterface.execute(db, "select min(Year) as min_year, max(Year) as max_year from movies") |> DataFrame
-  UnitRange(result[!,:min_year][1], result[!,:max_year][1])
-end
 
 #const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Genre", "Director", "Cast"]))
 const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Cast"]))
