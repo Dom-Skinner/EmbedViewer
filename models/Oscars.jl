@@ -11,7 +11,7 @@ import Colors
 import ColorSchemes
 
 const ALL = "All"
-const db = SQLite.DB(joinpath("data", "oscars.db"))
+#const db = SQLite.DB(joinpath("data", "oscars.db"))
 
 db_multi = DataFrame()
 db_multi[!,"System name"] = ["White Matter", "Telencephalon", "Diencephalon", "Mesencephalon","Metencephalon",
@@ -137,7 +137,7 @@ export Oscar
 
 @reactive mutable struct Oscar <: ReactiveModel
   
-  movies::R{DataTable} = DataTable(oscars())
+  movies::R{DataTable} = DataTable(DataFrame())
 
   multi_systems::R{DataTable} = DataTable(filtered_systems(),multi_table_options)
   multi_systems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
