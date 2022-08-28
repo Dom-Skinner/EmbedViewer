@@ -114,20 +114,6 @@ function restricted_distance_matrix(ii)
   return d_mat[idx_keep,idx_keep], replace_names.(text_names), color_vec[idx_keep]
 end
 
-
-# select the data from the db that matches the filters
-function oscars(filters::Vector{<:String} = String[])
-  query = "select * from movies where 1"
-  for f in filters
-    isempty(f) && continue
-    query *= " and $f"
-  end
-
-  # @debug query
-
-  DBInterface.execute(db, query) |> DataFrame
-end
-
 function filtered_systems()
   ## will eventually return a filtered version of db_multi
   return db_multi
