@@ -165,7 +165,7 @@ export Oscar
   multi_systems_selection::R{DataTableSelection} = DataTableSelection()
 
   selected_mvie::R{Dict} = Dict{String,Any}()
-  data::R{Vector{PlotData}} = [plot_data()]
+  MDS12_data::R{Vector{PlotData}} = [plot_data()]
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
   
@@ -173,7 +173,7 @@ export Oscar
   one_way_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
 
   
-  @mixin data::PlotlyEvents
+  @mixin MDS12_data::PlotlyEvents
 
   @mixin one_way_traces::PlotlyEvents
 end
@@ -193,7 +193,7 @@ function handlers(model::Oscar)
     MDS_coords = permutedims(MultivariateStats.transform(MultivariateStats.fit(MDS,
         Matrix(d_mat_r), maxoutdim=3, distances=true)))
     
-    model.data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names,cvec)]
+    model.MDS12_data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names,cvec)]
     model.one_way_traces[] = [plot_data_MDS(MDS_coords[:,2:3],text_names,cvec)]
     
     model.layout[] = plot_layout("MDS PC1", "MDS PC2")
