@@ -64,9 +64,37 @@ const color_dict = Dict("White Matter"=>"#A6CEE2",
                   "1:2:3: ellipsoids"=>"#F57F20",
                   "Polydisperse packing"=>"#942768", 
                   "Glassy material"=>"#E12028",  
-                  "Diffusion limited aggregation"=>"#942768",
+                  "Diffusion limited aggregation"=>"#8E9838",
                   "Star positions"=>"#8E9738", 
-                  "Poisson-Voronoi"=>"#8E9838")
+                  "Poisson-Voronoi"=>"#942768")
+
+symbol_dict = Dict("White Matter"=>"diamond",
+                  "Telencephalon"=>"diamond",
+                  "Diencephalon"=>"diamond",
+                  "Mesencephalon"=>"diamond",
+                  "Metencephalon"=>"diamond",
+                  "Mylencephalon"=>"diamond",
+                  "Spinal Cord"=>"diamond",
+                  "Olfactory Epithelium"=>"diamond",
+                  "Hypothalamus"=>"diamond",
+                  "E. coli"=>"square", 
+                  "P. aeruginosa"=>"square", 
+                  "S. enterica"=>"square", 
+                  "V. cholerae"=>"square", 
+                  "Zebrafish Embryo"=>"circle",
+                  "D. melongaster"=>"hexagon", 
+                  "C. elegans"=>"triangle-down",  
+                  "P. mammillata"=>"triangle-down", 
+                  "Cancer organoid"=>"triangle-down", 
+                  "Sphere packing"=>"triangle-up-open",
+                  "1:1:4 ellipsoids"=>"triangle-up-open",
+                  "1:4:4: ellipsoids"=>"triangle-up-open",
+                  "1:2:3: ellipsoids"=>"triangle-up-open",
+                  "Polydisperse packing"=>"triangle-up-open", 
+                  "Glassy material"=>"square-open",  
+                  "Diffusion limited aggregation"=>"circle-open",
+                  "Star positions"=>"star-open", 
+                  "Poisson-Voronoi"=>"square-open")                  
 
 register_mixin(@__MODULE__)
 
@@ -120,7 +148,9 @@ function plot_data_MDS(mds_coord,text_names,cvec)
       name = "number of casts",
       mode = "markers",
       text = text_names,
-      marker = Dict(:color => [color_dict[t] for t in text_names]),
+      #marker = Dict(:color => "#035555",:symbol=>"square"),
+      marker = Dict(:color => [color_dict[t] for t in text_names],
+            :symbol=>[symbol_dict[t] for t in text_names]),
       plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
     )
 end
@@ -151,6 +181,7 @@ export Oscar
   one_way_traces::R{Vector{PlotData}} = [plot_data()]
   one_way_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
 
+  
   @mixin data::PlotlyEvents
 
   @mixin one_way_traces::PlotlyEvents
