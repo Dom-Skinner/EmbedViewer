@@ -37,7 +37,108 @@ const color_vec = vcat("#A6CEE2","#2179B4","#B4D88B","#36A047","#F6999A","#E21F2
                     repeat(["#F47A51"],14),"#FFDE17", "#FDBF6D", "#2279B5", repeat(["#E12028","#37A048","#F57F20","#2279B5","#952768"],5),
                     repeat(["#942768"],5),repeat(["#E12028"],3),"#8E9738",repeat(["#8E9838"],5))
 
-const color_dict = Dict("White Matter"=>"#A6CEE2",
+                   
+                    
+                    
+                    
+                                        
+color_dict = Dict("cheng_zebrafish_region_2" =>"#A6CEE2", 
+      "cheng_zebrafish_region_3"=> "#2179B4",
+      "cheng_zebrafish_region_4"=> "#B4D88B",
+      "cheng_zebrafish_region_5"=> "#36A047",
+      "cheng_zebrafish_region_6"=> "#F6999A",
+      "cheng_zebrafish_region_7"=> "#E21F26",
+      "cheng_zebrafish_region_8"=> "#FDBF6F",
+      "cheng_zebrafish_region_9"=> "#F57F20",
+      "cheng_zebrafish_region_10"=> "#CAB3D6",
+      "data/motif/Biofilm/ecoli_Pos11-kde2011.h5"=>"#EC523F", 
+      "data/motif/Biofilm/ecoli_Pos14_3-kde2011.h5"=>"#EC523F", 
+      "data/motif/Biofilm/ecoli_Pos19-kde2011.h5"=>"#EC523F", 
+      "data/motif/Biofilm/ecoli_Pos32-kde2011.h5"=>"#EC523F", 
+      "data/motif/Biofilm/ecoli_Pos6_3-kde2011.h5"=>"#EC523F", 
+      "data/motif/Biofilm/pseudomonas_Pos11.h5"=>"#40A44A", 
+      "data/motif/Biofilm/pseudomonas_Pos28.h5"=>"#40A44A", 
+      "data/motif/Biofilm/pseudomonas_Pos41.h5"=>"#40A44A", 
+      "data/motif/Biofilm/pseudomonas_Pos47.h5"=>"#40A44A", 
+      "data/motif/Biofilm/pseudomonas_Pos5.h5"=>"#40A44A", 
+      "data/motif/Biofilm/salmonella_Pos10.h5"=>"#B276B2", 
+      "data/motif/Biofilm/salmonella_Pos13.h5"=>"#B276B2", 
+      "data/motif/Biofilm/salmonella_Pos16.h5"=>"#B276B2", 
+      "data/motif/Biofilm/salmonella_Pos19.h5"=>"#B276B2", 
+      "data/motif/Biofilm/salmonella_Pos21.h5"=>"#B276B2", 
+      "data/motif/Biofilm/vibrio_Pos11-kdv615.h5"=>"#AB8E30", 
+      "data/motif/Biofilm/vibrio_Pos16-kdv615.h5"=>"#AB8E30", 
+      "data/motif/Biofilm/vibrio_Pos23-kdv615.h5"=>"#AB8E30", 
+      "data/motif/Biofilm/vibrio_Pos27-kdv615.h5"=>"#AB8E30", 
+      "data/motif/Biofilm/vibrio_Pos5-kdv615.h5"=>"#AB8E30", 
+      "data/motif/Keller2008/zebrafish_embryo_150.h5"=>"#9BD2D9",
+      "data/motif/Keller2008/zebrafish_embryo_230.h5"=>"#7ABDD0", 
+      "data/motif/Keller2008/zebrafish_embryo_310.h5"=>"#60A5C6", 
+      "data/motif/Keller2008/zebrafish_embryo_390.h5"=>"#4D8EBF", 
+      "data/motif/Keller2008/zebrafish_embryo_470.h5"=>"#4375B5", 
+      "data/motif/Keller2008/zebrafish_embryo_550.h5"=>"#405CA7", 
+      "data/motif/Keller2008/zebrafish_embryo_630.h5"=>"#3D448A", 
+      "data/motif/Keller2008/zebrafish_embryo_710.h5"=>"#333265", 
+      "data/motif/Keller2008/zebrafish_embryo_790.h5"=>"#21203F", 
+      "data/motif/Keller2008/zebrafish_embryo_870.h5"=>"#111321", 
+      "data/motif/Keller2010/fly_embryo_51.h5"=>"#FCDEB3", 
+      "data/motif/Keller2010/fly_embryo_61.h5"=>"#FDD49E", 
+      "data/motif/Keller2010/fly_embryo_71.h5"=>"#FDC892", 
+      "data/motif/Keller2010/fly_embryo_81.h5"=>"#FBBA84", 
+      "data/motif/Keller2010/fly_embryo_91.h5"=>"#F9A470", 
+      "data/motif/Keller2010/fly_embryo_101.h5"=>"#F68D5C", 
+      "data/motif/Keller2010/fly_embryo_111.h5"=>"#F47A51", 
+      "data/motif/Keller2010/fly_embryo_121.h5"=>"#ED6648", 
+      "data/motif/Keller2010/fly_embryo_131.h5"=>"#E34C34",
+      "data/motif/Keller2010/fly_embryo_141.h5"=>"#D83327", 
+      "data/motif/Keller2010/fly_embryo_151.h5"=>"#C42126", 
+      "data/motif/Keller2010/fly_embryo_161.h5"=>"#B21F24", 
+      "data/motif/Keller2010/fly_embryo_171.h5"=>"#991D20", 
+      "data/motif/Keller2010/fly_embryo_181.h5"=>"#7E1416", 
+      "worm"=>"#FFDE17", 
+      "ascidian"=>"#FDBF6D", 
+      "Guo_organoid"=>"#2279B5", 
+      "data/motif/Packing/PackedEllipses1.h5"=>"#E21F26", 
+      "data/motif/Packing/PackedMandM1.h5"=>"#36A047", 
+      "data/motif/Packing/PackedIreg1.h5"=>"#F57F20", 
+      "data/motif/Packing/PackedSpheres1.h5"=>"#2179B4", 
+      "data/motif/Packing/PolySpheres1.h5"=>"#942768", 
+      "data/motif/Packing/PackedEllipses2.h5"=>"#E21F26", 
+      "data/motif/Packing/PackedMandM2.h5"=>"#36A047", 
+      "data/motif/Packing/PackedIreg2.h5"=>"#F57F20", 
+      "data/motif/Packing/PackedSpheres2.h5"=>"#2179B4", 
+      "data/motif/Packing/PolySpheres2.h5"=>"#942768", 
+      "data/motif/Packing/PackedEllipses3.h5"=>"#E21F26", 
+      "data/motif/Packing/PackedMandM3.h5"=>"#36A047", 
+      "data/motif/Packing/PackedIreg3.h5"=>"#F57F20", 
+      "data/motif/Packing/PackedSpheres3.h5"=>"#2179B4", 
+      "data/motif/Packing/PolySpheres3.h5"=>"#942768", 
+      "data/motif/Packing/PackedEllipses4.h5"=>"#E21F26", 
+      "data/motif/Packing/PackedMandM4.h5"=>"#36A047",
+      "data/motif/Packing/PackedIreg4.h5"=>"#F57F20", 
+      "data/motif/Packing/PackedSpheres4.h5"=>"#2179B4", 
+      "data/motif/Packing/PolySpheres4.h5"=>"#942768", 
+      "data/motif/Packing/PackedEllipses5.h5"=>"#E21F26", 
+      "data/motif/Packing/PackedMandM5.h5"=>"#36A047", 
+      "data/motif/Packing/PackedIreg5.h5"=>"#F57F20", 
+      "data/motif/Packing/PackedSpheres5.h5"=>"#2179B4", 
+      "data/motif/Packing/PolySpheres5.h5"=>"#942768", 
+      "data/motif/PV/PV_1.h5"=>"#942768", 
+      "data/motif/PV/PV_2.h5"=>"#942768", 
+      "data/motif/PV/PV_3.h5"=>"#942768", 
+      "data/motif/PV/PV_4.h5"=>"#942768", 
+      "data/motif/PV/PV_5.h5"=>"#942768", 
+      "data/motif/Glassy/glass_T_044_1.h5"=>"#E12028", 
+      "data/motif/Glassy/glass_T_044_2.h5"=>"#E12028", 
+      "data/motif/Glassy/glass_T_044_3.h5"=>"#E12028", 
+      "data/motif/HYGStarDatabase/star_positions.h5"=>"#8E9738", 
+      "data/motif/DLA/DLA_1.h5"=>"#8E9838", 
+      "data/motif/DLA/DLA_2.h5"=>"#8E9838", 
+      "data/motif/DLA/DLA_3.h5"=>"#8E9838", 
+      "data/motif/DLA/DLA_4.h5"=>"#8E9838", 
+      "data/motif/DLA/DLA_5.h5"=>"#8E9838")
+
+const color_dict_ = Dict("White Matter"=>"#A6CEE2",
                   "Telencephalon"=>"#2179B4",
                   "Diencephalon"=>"#B4D88B",
                   "Mesencephalon"=>"#36A047",
@@ -106,7 +207,7 @@ function restricted_distance_matrix(ii)
   key_words  = db_multi[ii,"Search word"]
   idx_keep = [any(occursin.(key_words, n)) for n in names(d_mat)]
   text_names = names(d_mat)[idx_keep]
-  return d_mat[idx_keep,idx_keep], replace_names.(text_names), color_vec[idx_keep]
+  return d_mat[idx_keep,idx_keep], text_names
 end
 
 function filtered_systems()
@@ -122,16 +223,16 @@ function plot_data()
           )
 end
 
-function plot_data_MDS(mds_coord,text_names,cvec)
+function plot_data_MDS(mds_coord,text_names)
   PlotData(
       x = mds_coord[:,1],
       y = mds_coord[:,2],
       name = "number of casts",
       mode = "markers",
-      text = text_names,
+      text = replace_names.(text_names),
       #marker = Dict(:color => "#035555",:symbol=>"square"),
       marker = Dict(:color => [color_dict[t] for t in text_names],
-            :symbol=>[symbol_dict[t] for t in text_names]),
+            :symbol=>[symbol_dict[replace_names(t)] for t in text_names]),
       plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
     )
 end
@@ -158,7 +259,7 @@ export Oscar
 
 @reactive mutable struct Oscar <: ReactiveModel
   
-  movies::R{DataTable} = DataTable(DataFrame())
+  jghjgc::R{DataTable} = DataTable(DataFrame())
 
   multi_systems::R{DataTable} = DataTable(filtered_systems(),multi_table_options)
   multi_systems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
@@ -189,12 +290,12 @@ function handlers(model::Oscar)
     if length(ii) == 0
       ii = 1:size(db_multi)[1]
     end
-    d_mat_r, text_names, cvec = restricted_distance_matrix(ii)
+    d_mat_r, text_names  = restricted_distance_matrix(ii)
     MDS_coords = permutedims(MultivariateStats.transform(MultivariateStats.fit(MDS,
         Matrix(d_mat_r), maxoutdim=3, distances=true)))
     
-    model.MDS12_data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names,cvec)]
-    model.MDS23_data[] = [plot_data_MDS(MDS_coords[:,2:3],text_names,cvec)]
+    model.MDS12_data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names)]
+    model.MDS23_data[] = [plot_data_MDS(MDS_coords[:,2:3],text_names)]
     
     model.layout[] = plot_layout("MDS PC1", "MDS PC2")
     model.one_way_layout[] = plot_layout("MDS PC2", "MDS PC3")
