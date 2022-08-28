@@ -169,13 +169,13 @@ export Oscar
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
   
-  one_way_traces::R{Vector{PlotData}} = [plot_data()]
+  MDS23_data::R{Vector{PlotData}} = [plot_data()]
   one_way_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
 
   
   @mixin MDS12_data::PlotlyEvents
 
-  @mixin one_way_traces::PlotlyEvents
+  @mixin MDS23_data::PlotlyEvents
 end
 
 Stipple.js_mounted(::Oscar) = watchplots()
@@ -194,7 +194,7 @@ function handlers(model::Oscar)
         Matrix(d_mat_r), maxoutdim=3, distances=true)))
     
     model.MDS12_data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names,cvec)]
-    model.one_way_traces[] = [plot_data_MDS(MDS_coords[:,2:3],text_names,cvec)]
+    model.MDS23_data[] = [plot_data_MDS(MDS_coords[:,2:3],text_names,cvec)]
     
     model.layout[] = plot_layout("MDS PC1", "MDS PC2")
     model.one_way_layout[] = plot_layout("MDS PC2", "MDS PC3")
