@@ -72,7 +72,7 @@ register_mixin(@__MODULE__)
 
 
 #const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Genre", "Director", "Cast"]))
-const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Cast"]))
+#const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Cast"]))
 const multi_table_options = DataTableOptions(columns = Column(["System name", "Number of points"]))
 
 function replace_names(text_name)
@@ -137,7 +137,7 @@ export Oscar
 
 @reactive mutable struct Oscar <: ReactiveModel
   
-  movies::R{DataTable} = DataTable(oscars(), table_options)
+  movies::R{DataTable} = DataTable(oscars())
 
   multi_systems::R{DataTable} = DataTable(filtered_systems(),multi_table_options)
   multi_systems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
