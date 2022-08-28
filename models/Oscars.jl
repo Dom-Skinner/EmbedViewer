@@ -85,17 +85,7 @@ function restricted_distance_matrix(ii)
   text_names = names(d_mat)[idx_keep]
   return d_mat[idx_keep,idx_keep], replace_names.(text_names), color_vec[idx_keep]
 end
-# prepare the options for the various select inputs, using the data from the db
-function movie_data(column)
-  result = DBInterface.execute(db, "select distinct(`$column`) from movies") |> DataFrame
-  c = String[]
-  for entry in result[!,Symbol(column)]
-    for e in split(entry, ',')
-      push!(c, strip(e))
-    end
-  end
-  pushfirst!(c |> unique! |> sort!, ALL)
-end
+
 
 # select the data from the db that matches the filters
 function oscars(filters::Vector{<:String} = String[])
@@ -113,11 +103,6 @@ end
 function filtered_systems()
   ## will eventually return a filtered version of db_multi
   return db_multi
-end
-
-# checks if the filter is a value from db of placeholder "All"
-function validvalue(filters::Vector{<:String})
-  [endswith(f, "'%$(ALL)%'") || endswith(f, "'%%'") ? "" : f for f in filters]
 end
 
 # processes the plot's data based on filters
