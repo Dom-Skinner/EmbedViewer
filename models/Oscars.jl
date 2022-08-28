@@ -39,6 +39,35 @@ const color_vec = vcat("#A6CEE2","#2179B4","#B4D88B","#36A047","#F6999A","#E21F2
                     repeat(["#EC523F"],5),repeat(["#40A44A"],5),repeat(["#B276B2"],5),repeat(["#AB8E30"],5),repeat(["#4275B5"],10),
                     repeat(["#F47A51"],14),"#FFDE17", "#FDBF6D", "#2279B5", repeat(["#E12028","#37A048","#F57F20","#2279B5","#952768"],5),
                     repeat(["#942768"],5),repeat(["#E12028"],3),"#8E9738",repeat(["#8E9838"],5))
+
+const color_dict = Dict("White Matter"=>"#A6CEE2",
+                  "Telencephalon"=>"#2179B4",
+                  "Diencephalon"=>"#B4D88B",
+                  "Mesencephalon"=>"#36A047",
+                  "Metencephalon"=>"#F6999A",
+                  "Mylencephalon"=>"#E21F26",
+                  "Spinal Cord"=>"#FDBF6F",
+                  "Olfactory Epithelium"=>"#F57F20",
+                  "Hypothalamus"=>"#CAB3D6",
+                  "E. coli"=>"#EC523F", 
+                  "P. aeruginosa"=>"#40A44A", 
+                  "S. enterica"=>"#B276B2", 
+                  "V. cholerae"=>"#AB8E30", 
+                  "Zebrafish Embryo"=>"#4275B5",
+                  "D. melongaster"=>"#F47A51", 
+                  "C. elegans"=>"#FFDE17",  
+                  "P. mammillata"=>"#FDBF6D", 
+                  "Cancer organoid"=>"#2279B5", 
+                  "Sphere packing"=>"#2179B4",
+                  "1:1:4 ellipsoids"=>"#E21F26",
+                  "1:4:4: ellipsoids"=>"#36A047",
+                  "1:2:3: ellipsoids"=>"#F57F20",
+                  "Polydisperse packing"=>"#942768", 
+                  "Glassy material"=>"#E12028",  
+                  "Diffusion limited aggregation"=>"#942768",
+                  "Star positions"=>"#8E9738", 
+                  "Poisson-Voronoi"=>"#8E9838")
+
 register_mixin(@__MODULE__)
 
 # construct a range between the minimum and maximum number of oscars
@@ -117,7 +146,7 @@ function plot_data_MDS(mds_coord,text_names,cvec)
       name = "number of casts",
       mode = "markers",
       text = text_names,
-      marker = Dict(:color => cvec),
+      marker = Dict(:color => [color_dict[t] for t in text_names]),
       plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
     )
 end
