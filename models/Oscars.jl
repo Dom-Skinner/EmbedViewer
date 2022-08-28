@@ -14,14 +14,14 @@ const ALL = "All"
 const db = SQLite.DB(joinpath("data", "oscars.db"))
 
 db_multi = DataFrame()
-db_multi[!,"System name"] = ["Hypothalamus","White Matter", "Telencephalon","Diencephalon","Mesencephalon",
-                        "Olfactory Epithelium","Metencephalon", "Mylencephalon","Spinal Cord", 
+db_multi[!,"System name"] = ["White Matter", "Telencephalon", "Diencephalon", "Mesencephalon","Metencephalon",
+                          "Mylencephalon", "Spinal Cord", "Olfactory Epithelium",  "Hypothalamus",
                          "E. coli", "P. aeruginosa", "S. enterica", "V. cholerae", "Zebrafish Embryo",
-                        "D. melongaster", "P. mammillata", "Cancer organoid", "C. elegans", 
-                        "Diffusion limited aggregation", "Sphere packing", "1:1:4 ellipsoids", 
-                        "1:4:4: ellipsoids", "1:2:3: ellipsoids", "Polydisperse packing", "Glassy material", 
+                        "D. melongaster", "C. elegans",  "P. mammillata", "Cancer organoid", 
+                        "Sphere packing", "1:1:4 ellipsoids", "1:4:4: ellipsoids", "1:2:3: ellipsoids", 
+                        "Polydisperse packing", "Glassy material",  "Diffusion limited aggregation",
                         "Star positions", "Poisson-Voronoi"]
-db_multi[!,"Number of points"] = vcat(ones(9),5,5,5,5,10,14,1,1,1,5*ones(6),3,1,5)
+db_multi[!,"Number of points"] = vcat(ones(9),5*ones(4),10,14,ones(3),5*ones(5),3,5,1,5)
 db_multi[!,"Number of cells per point (approx)"] = vcat(5_000,20_000,35_000,12_500,90_000,7_500,150_000,25_000,7_500,14_000,18_000*ones(4),20_000,43_500,3_200,2_100,10_000*ones(6),4096,110_000,10_000)
 
 #TODO fix zebrafish region numbering
@@ -29,13 +29,13 @@ db_multi[!,"Search word"] = ["zebrafish_region_2","zebrafish_region_3", "zebrafi
                         "zebrafish_region_7","zebrafish_region_8", "zebrafish_region_9","zebrafish_region_10",
                         "ecoli", "pseudomonas", "salmonella", "vibrio",  "zebrafish_embryo",
                         "fly_embryo","worm",  "ascidian", "Guo_organoid", 
-                         "PackedSpheres", "PackedEllipses", "DLA",
-                        "PackedMandM", "PackedIreg", "PolySpheres", "Glassy", 
-                        "HYGStarDatabase", "PV/PV"]
+                         "PackedSpheres", "PackedEllipses", "PackedMandM", "PackedIreg", "PolySpheres", 
+                         "Glassy",  "DLA", "HYGStarDatabase", "PV/PV"]
 
 d_mat = CSV.read(joinpath("data", "total_distance_compute.txt"), DataFrame)
 
-const color_vec = vcat("#CAB3D7","#A7CEE2", "#2279B5", "#B3D88B", "#37A048", "#F57F20", "#F6999A", "#E12028", "#FDBF6E",
+
+const color_vec = vcat("#A6CEE2","#2179B4","#B4D88B","#36A047","#F6999A","#E21F26","#FDBF6F","#F57F20","#CAB3D6",
                     repeat(["#EC523F"],5),repeat(["#40A44A"],5),repeat(["#B276B2"],5),repeat(["#AB8E30"],5),repeat(["#4275B5"],10),
                     repeat(["#F47A51"],14),"#FFDE17", "#FDBF6D", "#2279B5", repeat(["#E12028","#37A048","#F57F20","#2279B5","#952768"],5),
                     repeat(["#942768"],5),repeat(["#E12028"],3),"#8E9738",repeat(["#8E9838"],5))
