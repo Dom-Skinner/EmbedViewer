@@ -157,11 +157,21 @@ end
 
 function plot_layout(xtitle, ytitle)
   PlotLayout(
-    xaxis = [PlotLayoutAxis(title = xtitle)],
-    yaxis = [PlotLayoutAxis(xy = "y", title = ytitle)]#,
-    #scaleanchor = "x"
+    xaxis = [PlotLayoutAxis(xy = "x",title = xtitle)],
+    yaxis = [PlotLayoutAxis(xy = "y", title = ytitle, anchor="x",scaleratio=1)]#,
+    #scaleanchor = "x"scaleanchor="x", scaleratio=1
   )
 end
+
+#=
+function plot_annotate(xtitle, ytitle)
+  PlotAnnotation(
+    xaxis = [PlotLayoutAxis(title = xtitle)],
+    yaxis = [PlotLayoutAxis(xy = "y", title = ytitle,anchor="x",scaleratio=1)]#,
+    #scaleanchor = "x"scaleanchor="x", scaleratio=1
+  )
+end
+=#
 
 export Oscar
 
@@ -173,7 +183,7 @@ export Oscar
   multi_systems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
   multi_systems_selection::R{DataTableSelection} = DataTableSelection()
 
-  selected_movie::R{Dict} = Dict{String,Any}()
+  selected_mvie::R{Dict} = Dict{String,Any}()
   data::R{Vector{PlotData}} = [plot_data()]
   layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
