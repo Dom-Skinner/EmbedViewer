@@ -10,9 +10,6 @@ using MultivariateStats, CSV
 import Colors
 import ColorSchemes
 
-const ALL = "All"
-#const db = SQLite.DB(joinpath("data", "oscars.db"))
-
 db_multi = DataFrame()
 db_multi[!,"System name"] = ["White Matter", "Telencephalon", "Diencephalon", "Mesencephalon","Metencephalon",
                           "Mylencephalon", "Spinal Cord", "Olfactory Epithelium",  "Hypothalamus",
@@ -99,8 +96,6 @@ symbol_dict = Dict("White Matter"=>"diamond",
 register_mixin(@__MODULE__)
 
 
-#const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Genre", "Director", "Cast"]))
-#const table_options = DataTableOptions(columns = Column(["Title", "Year", "Oscars", "Country", "Cast"]))
 const multi_table_options = DataTableOptions(columns = Column(["System name", "Number of points"]))
 
 function replace_names(text_name)
@@ -204,10 +199,6 @@ function handlers(model::Oscar)
     model.layout[] = plot_layout("MDS PC1", "MDS PC2")
     model.one_way_layout[] = plot_layout("MDS PC2", "MDS PC3")
     model.isprocessing[] = false
-  end
-
-  on(model.data_hover) do data
-    return
   end
 
   model
