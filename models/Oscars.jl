@@ -224,11 +224,11 @@ export Oscar
   
   jghjgc::R{DataTable} = DataTable(DataFrame())
 
-  multisystems::R{DataTable} = DataTable(filtered_systems(),multi_table_options)
+  multisystems::R{DataTable} = DataTable(db_multi,multi_table_options)
   multisystems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
   multisystems_selection::R{DataTableSelection} = DataTableSelection()
 
-  selected_mvie::R{Dict} = Dict{String,Any}()
+  sed_mvie::R{Dict} = Dict{String,Any}()
   MDS12_data::R{Vector{PlotData}} = [plot_data()]
   MDS12_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
