@@ -1,4 +1,4 @@
-module OscarsExplorer
+module EmbedViewer
 
 using Genie
 
