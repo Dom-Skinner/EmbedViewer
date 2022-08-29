@@ -202,7 +202,7 @@ end
 function plot_layout(xtitle, ytitle)
   PlotLayout(
     xaxis = [PlotLayoutAxis(xy = "x",title = xtitle)],
-    yaxis = [PlotLayoutAxis(xy = "y", title = ytitle, anchor="x",scaleratio=1)]#,
+    yaxis = [PlotLayoutAxis(xy = "y", title = ytitle, scaleanchor="x",scaleratio=1)]
     #scaleanchor = "x"scaleanchor="x", scaleratio=1
   )
 end
