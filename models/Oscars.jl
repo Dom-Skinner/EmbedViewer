@@ -224,9 +224,9 @@ export Oscar
   
   jghjgc::R{DataTable} = DataTable(DataFrame())
 
-  multi_systems::R{DataTable} = DataTable(filtered_systems(),multi_table_options)
-  multi_systems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
-  multi_systems_selection::R{DataTableSelection} = DataTableSelection()
+  multisystems::R{DataTable} = DataTable(filtered_systems(),multi_table_options)
+  multisystems_pagination::DataTablePagination = DataTablePagination(rows_per_page=50)
+  multisystems_selection::R{DataTableSelection} = DataTableSelection()
 
   selected_mvie::R{Dict} = Dict{String,Any}()
   MDS12_data::R{Vector{PlotData}} = [plot_data()]
@@ -246,7 +246,7 @@ Stipple.js_mounted(::Oscar) = watchplots()
 
 function handlers(model::Oscar)
   
-  onany(model.multi_systems_selection, model.isready) do msel, i
+  onany(model.multisystems_selection, model.isready) do msel, i
     model.isprocessing[] = true
 
     ii = union(getindex.(msel, "__id"))
