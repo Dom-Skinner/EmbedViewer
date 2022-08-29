@@ -19,7 +19,7 @@ db_multi[!,"System name"] = ["White Matter", "Telencephalon", "Diencephalon", "M
                         "Polydisperse packing", "Glassy material",  "Diffusion limited aggregation",
                         "Star positions", "Poisson-Voronoi"]
 db_multi[!,"Number of samples"] = vcat(ones(9),5*ones(4),10,14,ones(3),5*ones(5),3,5,1,5)
-db_multi[!,"Data source"] = ["Ref [1]","Ref [1]", "Ref [1]","Ref [1]","Ref [1]","Ref [1]","Ref [1]", "Ref [1]","Ref [1]","ecoli", "pseudomonas", "salmonella", "vibrio",  "zebrafish_embryo","fly_embryo","worm",  "ascidian", "Guo_organoid", "PackedSpheres", "PackedEllipses", "PackedMandM", "PackedIreg", "PolySpheres", "Glassy",  "DLA", "HYGStarDatabase", "PV/PV"]
+db_multi[!,"Data source"] = vcat(repeat(["Ref [1]"],9),repeat(["Ref [2]"],4), "Ref [3]","Ref [4]","Ref [5]", "Ref [6]", "Ref [7]", repeat(["Ref [8]"],5), "Ref [9]",  "Ref [10]", "Ref [11]", "Ref [12]")
 db_multi[!,"Number of cells per point (approx)"] = vcat(5_000,20_000,35_000,12_500,90_000,7_500,150_000,25_000,7_500,18_000*ones(4),14_000,20_000,43_500,3_200,2_100,10_000*ones(5),4096,10_000,110_000,10_000)
 
 #TODO fix zebrafish region numbering
@@ -230,11 +230,11 @@ export Oscar
 
   selected_mvie::R{Dict} = Dict{String,Any}()
   MDS12_data::R{Vector{PlotData}} = [plot_data()]
-  layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
+  MDS12_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
   
   
   MDS23_data::R{Vector{PlotData}} = [plot_data()]
-  one_way_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
+  MDS23_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
 
   
   @mixin MDS12_data::PlotlyEvents
@@ -260,8 +260,8 @@ function handlers(model::Oscar)
     model.MDS12_data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names)]
     model.MDS23_data[] = [plot_data_MDS(MDS_coords[:,3:-1:2],text_names)]
     
-    model.layout[] = plot_layout("MDS PC1", "MDS PC2")
-    model.one_way_layout[] = plot_layout("MDS PC3", "MDS PC2")
+    model.MDS12_layout[] = plot_layout("MDS PC1", "MDS PC2")
+    model.MDS23_layout[] = plot_layout("MDS PC3", "MDS PC2")
     model.isprocessing[] = false
   end
 

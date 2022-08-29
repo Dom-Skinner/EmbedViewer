@@ -8,10 +8,10 @@
 </div>
 <div class="row">
     <div class="col col-6 col-sm">
-        <plotly :data="MDS12_data" :layout="layout" :scrollzoom="true" class="multi_systems_plot sync_data"></plotly>
+        <plotly :data="MDS12_data" :layout="MDS12_layout" :scrollzoom="true" class="multi_systems_plot sync_data"></plotly>
     </div>
     <div class="col col-6 col-sm">
-        <plotly :data="MDS23_data" :layout="one_way_layout" class="multi_systems_plot sync_data"></plotly>
+        <plotly :data="MDS23_data" :layout="MDS23_layout" class="multi_systems_plot sync_data"></plotly>
     </div>
 </div>
 <div class="row">
@@ -19,10 +19,10 @@
         <q-table flat="" :columns="multi_systems.columns_multi_systems" selection="multiple" :selected.sync="multi_systems_selection" :data="multi_systems.data_multi_systems" dense="" row-key="__id" :pagination="multi_systems_pagination" class="multi_systems_table"></q-table>
     </div>
     <div class="col col-6 col-sm">
-        <p><img src="/img/Legend.jpg" width="70%" height="auto" alt="Legend of systems" ,class="img-responsive" /></p>
+        <p><img src="/img/Legend.png" width="100%" height="auto" alt="Legend of systems" ,class="img-responsive" /></p>
         <h1 class="st-header__title text-h3">References<br /></h1>
-        <p><a href="https://github.com/dom-skinner" class="bold-text">Ref [2]</a></p>
-        <p><a href="https://scholar.google.com/citations?hl=en&user=BrN3ChAAAAAJ&view_op=list_works" class="bold-text">Ref [3]</a></p>
+        <p><a href="https://github.com/dom-skinner" class="bold-text">Ref [1]</a> Ding et al ...</p>
+        <p><a href="https://scholar.google.com/citations?hl=en&user=BrN3ChAAAAAJ&view_op=list_works" class="bold-text">Ref [2]</a></p>
         <h1 class="st-header__title text-h3">Contributing to the phase diagram<br /></h1>
         <p>Instructions go here</p>
     </div>
