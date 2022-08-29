@@ -19,7 +19,7 @@ db_multi[!,"System name"] = ["White Matter", "Telencephalon", "Diencephalon", "M
                         "Polydisperse packing", "Glassy material",  "Diffusion limited aggregation",
                         "Star positions", "Poisson-Voronoi"]
 db_multi[!,"Number of samples"] = vcat(ones(9),5*ones(4),10,14,ones(3),5*ones(5),3,5,1,5)
-#db_multi[!,"Data source"] = ["Ref [15]","zebrafish_region_3", "zebrafish_region_4","zebrafish_region_5","zebrafish_region_6","zebrafish_region_7","zebrafish_region_8", "zebrafish_region_9","zebrafish_region_10","ecoli", "pseudomonas", "salmonella", "vibrio",  "zebrafish_embryo","fly_embryo","worm",  "ascidian", "Guo_organoid", "PackedSpheres", "PackedEllipses", "PackedMandM", "PackedIreg", "PolySpheres", "Glassy",  "DLA", "HYGStarDatabase", "PV/PV"]
+db_multi[!,"Data source"] = ["Ref [1]","zebrafish_region_3", "zebrafish_region_4","zebrafish_region_5","zebrafish_region_6","zebrafish_region_7","zebrafish_region_8", "zebrafish_region_9","zebrafish_region_10","ecoli", "pseudomonas", "salmonella", "vibrio",  "zebrafish_embryo","fly_embryo","worm",  "ascidian", "Guo_organoid", "PackedSpheres", "PackedEllipses", "PackedMandM", "PackedIreg", "PolySpheres", "Glassy",  "DLA", "HYGStarDatabase", "PV/PV"]
 db_multi[!,"Number of cells per point (approx)"] = vcat(5_000,20_000,35_000,12_500,90_000,7_500,150_000,25_000,7_500,18_000*ones(4),14_000,20_000,43_500,3_200,2_100,10_000*ones(5),4096,10_000,110_000,10_000)
 
 #TODO fix zebrafish region numbering
@@ -160,7 +160,7 @@ symbol_dict = Dict("White Matter"=>"diamond",
 register_mixin(@__MODULE__)
 
 
-const multi_table_options = DataTableOptions(columns = Column(["System name", "Number of samples"]))
+const multi_table_options = DataTableOptions(columns = Column(["System name", "Number of samples","Data source"]))
 
 function replace_names(text_name)
   idx = findfirst(occursin.(db_multi[:,"Search word"],text_name))
