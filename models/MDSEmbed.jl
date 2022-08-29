@@ -4,7 +4,6 @@ using Stipple
 using StippleUI
 using StipplePlotly
 using PlotlyBase
-using SQLite
 using DataFrames
 using MultivariateStats, CSV
 import Colors
