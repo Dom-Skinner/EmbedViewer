@@ -6,7 +6,7 @@ using StipplePlotly
 using Stipple.Pages
 using Stipple.ModelStorage.Sessions
 
-using OscarsExplorer.Oscars
+using OscarsExplorer.MDSEmbed
 
 if Genie.Configuration.isprod()
   Genie.Assets.assets_config!([Genie, Stipple, StippleUI, StipplePlotly], host = "https://cdn.statically.io/gh/GenieFramework")
@@ -14,5 +14,5 @@ end
 
 Page("/", view = "views/hello.jl.html",
           layout = "layouts/app.jl.html",
-          model = () -> init_from_storage(MDSInfo, debounce = 30) |> Oscars.handlers,
+          model = () -> init_from_storage(MDSInfo, debounce = 30) |> MDSEmbed.handlers,
           context = @__MODULE__)

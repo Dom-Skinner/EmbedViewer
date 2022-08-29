@@ -1,4 +1,4 @@
-module Oscars
+module MDSEmbed
 
 using Stipple
 using StippleUI
