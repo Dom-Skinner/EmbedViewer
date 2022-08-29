@@ -258,10 +258,10 @@ function handlers(model::Oscar)
         Matrix(d_mat_r), maxoutdim=3, distances=true)))
     
     model.MDS12_data[] = [plot_data_MDS(MDS_coords[:,1:2],text_names)]
-    model.MDS23_data[] = [plot_data_MDS(MDS_coords[:,2:3],text_names)]
+    model.MDS23_data[] = [plot_data_MDS(MDS_coords[:,3:-1:2],text_names)]
     
     model.layout[] = plot_layout("MDS PC1", "MDS PC2")
-    model.one_way_layout[] = plot_layout("MDS PC2", "MDS PC3")
+    model.one_way_layout[] = plot_layout("MDS PC3", "MDS PC2")
     model.isprocessing[] = false
   end
 
