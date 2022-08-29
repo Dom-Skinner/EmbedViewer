@@ -218,9 +218,9 @@ function plot_annotate(xtitle, ytitle)
 end
 =#
 
-export Oscar
+export MDSInfo
 
-@reactive mutable struct Oscar <: ReactiveModel
+@reactive mutable struct MDSInfo <: ReactiveModel
   
   jghjgc::R{DataTable} = DataTable(DataFrame())
 
@@ -242,9 +242,9 @@ export Oscar
   @mixin MDS23_data::PlotlyEvents
 end
 
-Stipple.js_mounted(::Oscar) = watchplots()
+Stipple.js_mounted(::MDSInfo) = watchplots()
 
-function handlers(model::Oscar)
+function handlers(model::MDSInfo)
   
   onany(model.multisystems_selection, model.isready) do msel, i
     model.isprocessing[] = true

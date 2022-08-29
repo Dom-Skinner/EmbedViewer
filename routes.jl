@@ -14,5 +14,5 @@ end
 
 Page("/", view = "views/hello.jl.html",
           layout = "layouts/app.jl.html",
-          model = () -> init_from_storage(Oscar, debounce = 30) |> Oscars.handlers,
+          model = () -> init_from_storage(MDSInfo, debounce = 30) |> Oscars.handlers,
           context = @__MODULE__)
