@@ -1,1 +1,23 @@
 /* place your custom css here */
+pre {
+    display: block;
+    width: auto;
+    max-height: 600px;
+    overflow: auto;
+    background-color: #eee;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: var(--cassiopeia-color-primary, #111 );
+    scrollbar-color: #ccc transparent;
+    margin: 20px 40px;
+    padding: 30px;
+    word-wrap: normal;
+}
+
+pre > code {
+    display: block;
+    font-size: 1.0rem;
+    text-indent: 0;
+    color: #111;
+    white-space: inherit;
+}

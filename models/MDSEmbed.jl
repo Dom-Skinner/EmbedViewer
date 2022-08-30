@@ -18,8 +18,8 @@ db_multi[!,"System name"] = ["White Matter", "Telencephalon", "Diencephalon", "M
                         "Polydisperse packing", "Glassy material",  "Diffusion limited aggregation",
                         "Star positions", "Poisson-Voronoi"]
 db_multi[!,"Number of samples"] = vcat(ones(9),5*ones(4),10,14,ones(3),5*ones(5),3,5,1,5)
-db_multi[!,"Data source"] = vcat(repeat(["Ref [1]"],9),repeat(["Ref [2]"],4), "Ref [3]","Ref [4]","Ref [5]", "Ref [6]", "Ref [7]", repeat(["Simulated with code from Ref [8]"],5), "Ref [9]",  "Ref [10]", "Ref [11]", "Ref [12]")
-db_multi[!,"Number of cells per point (approx)"] = vcat(5_000,20_000,35_000,12_500,90_000,7_500,150_000,25_000,7_500,18_000*ones(4),14_000,20_000,43_500,3_200,2_100,10_000*ones(5),4096,10_000,110_000,10_000)
+db_multi[!,"Data source"] = vcat(repeat(["Ref [1]"],9),repeat(["Ref [2]"],4), "Ref [3]","Ref [4]","Ref [5]", "Ref [6]", "Ref [7]", repeat(["Simulated with code from Ref [8]"],5), "Ref [9]",  "Generated with code from https://github.com/fogleman/dlaf", "Ref [10]", "Generated for this project")
+db_multi[!,"Number of points per sample (approximate)"] = vcat(5_000,20_000,35_000,12_500,90_000,7_500,150_000,25_000,7_500,18_000*ones(4),14_000,20_000,43_500,3_200,2_100,10_000*ones(5),4096,10_000,110_000,10_000)
 
 #TODO fix zebrafish region numbering
 db_multi[!,"Search word"] = ["zebrafish_region_2","zebrafish_region_3", "zebrafish_region_4","zebrafish_region_5","zebrafish_region_6",
@@ -159,12 +159,13 @@ symbol_dict = Dict("White Matter"=>"diamond",
 register_mixin(@__MODULE__)
 
 
-const multi_table_options = DataTableOptions(columns = Column(["System name", "Number of samples","Data source"]))
+const multi_table_options = DataTableOptions(columns = Column(["System name", "Number of samples","Number of points per sample (approximate)","Data source"]))
 
 function replace_names(text_name)
   idx = findfirst(occursin.(db_multi[:,"Search word"],text_name))
   return db_multi[idx,"System name"]
 end
+
 function restricted_distance_matrix(ii)
   key_words  = db_multi[ii,"Search word"]
   idx_keep = [any(occursin.(key_words, n)) for n in names(d_mat)]
@@ -172,12 +173,6 @@ function restricted_distance_matrix(ii)
   return d_mat[idx_keep,idx_keep], text_names
 end
 
-function filtered_systems()
-  ## will eventually return a filtered version of db_multi
-  return db_multi
-end
-
-# processes the plot's data based on filters
 function plot_data()
   PlotData( x = (1:10),
             y = (1:10),
@@ -192,7 +187,6 @@ function plot_data_MDS(mds_coord,text_names)
       name = "number of casts",
       mode = "markers",
       text = replace_names.(text_names),
-      #marker = Dict(:color => "#035555",:symbol=>"square"),
       marker = Dict(:color => [color_dict[t] for t in text_names],
             :symbol=>[symbol_dict[replace_names(t)] for t in text_names]),
       plot = StipplePlotly.Charts.PLOT_TYPE_SCATTER
@@ -203,19 +197,8 @@ function plot_layout(xtitle, ytitle)
   PlotLayout(
     xaxis = [PlotLayoutAxis(xy = "x",title = xtitle,range=[-9, 9])],
     yaxis = [PlotLayoutAxis(xy = "y", title = ytitle, scaleanchor="x",scaleratio=1,range=[-4, 4])]
-    #scaleanchor = "x"scaleanchor="x", scaleratio=1
   )
 end
-
-#=
-function plot_annotate(xtitle, ytitle)
-  PlotAnnotation(
-    xaxis = [PlotLayoutAxis(title = xtitle)],
-    yaxis = [PlotLayoutAxis(xy = "y", title = ytitle,anchor="x",scaleratio=1)]#,
-    #scaleanchor = "x"scaleanchor="x", scaleratio=1
-  )
-end
-=#
 
 export MDSInfo
 
