@@ -3,16 +3,17 @@
 </header>
 <div class="row">
     <div class="col col-12 col-sm">
-        <p>The interactive plots below show a topological phase diagram of multicellular systems, 
-            where the pairwise topological distance between systems has been calculated and the 
-            resulting distance matrix is embedded into Euclidean space with multidimensional scaling (MDS). 
-            The topological distance computation relies only on local structure contained in the Delaunay 
-            tessellations of a 3D point cloud, whether the points come from particle centroids of a colloidal 
-            packing or cell nuclei in a tissue. Details of the distance are available in 
-            <a href="todo" class="bold-text">Skinner, Jeckel, Martin, Drescher, and Dunkel arXiv (2022)</a></p>
-        <p>Select systems from the table below to explore different parts of the phase diagram. 
-            For every new selection the MDS embedding is recalculated. To contribute and help expand the phase 
-            diagram, see instructions below.<p>
+        <p>The interactive plots below show a topological phase diagram of multicellular systems,
+            where the pairwise topological distance between systems has been calculated and the
+            resulting distance matrix is embedded into Euclidean space with multidimensional scaling (MDS).
+            The topological distance computation relies only on local structure contained in the Delaunay
+            tessellations of a 3D point cloud, whether the points come from particle centroids of a colloidal
+            packing or cell nuclei in a tissue. Details of the distance are available in
+            <a href="todo" class="bold-text">Skinner, Jeckel, Martin, Drescher, and Dunkel arXiv (2022)</a>
+        </p>
+        <p>Select systems from the table below to explore different parts of the phase diagram.
+            For every new selection the MDS embedding is recalculated. To contribute and help expand the phase
+            diagram, see instructions below.</p>
     </div>
 </div>
 <div class="row">
@@ -26,9 +27,6 @@
 <div class="row">
     <div class="col col-6 col-sm">
         <q-table flat="" :columns="multisystems.columns_multisystems" selection="multiple" :selected.sync="multisystems_selection" :data="multisystems.data_multisystems" dense="" row-key="__id" :pagination="multisystems_pagination" class="multisystems_table"></q-table>
-    </div>
-    <div class="col col-6 col-sm">
-        <p><img src="/img/Legend.png" width="100%" height="auto" alt="Legend of systems" ,class="img-responsive" /></p>
         <h1 class="st-header__title text-h3">References<br /></h1>
         <p><a href="https://doi.org/10.7554/eLife.44898" class="bold-text">[1]</a> Ding et al., <i>eLife</i>, <b>8</b>:e44898 (2019)</p>
         <p><a href="https://doi.org/10.1101/2021.08.06.455416" class="bold-text">[2]</a> Jeckel et al., bioRxiv:2021.08.06.4554</p>
@@ -41,8 +39,19 @@
         <p><a href="https://doi.org/10.1038/s41567-020-0842-8" class="bold-text">[9]</a> Bapst et al., <i>Nat. Phys.</i>, <b>16</b>:448 (2020)</p>
         <p><a href="https://github.com/fogleman/dlaf" class="bold-text">[10]</a> https://github.com/fogleman/dlaf</p>
         <p><a href="http://www.astronexus.com/hyg" class="bold-text">[11]</a> The HYG Database</p>
+    </div>
+    <div class="col col-6 col-sm">
+        <p><img src="/img/Legend.png" width="100%" height="auto" alt="Legend of systems" ,class="img-responsive" /></p>
+      
         <h1 class="st-header__title text-h3">Contributing to the phase diagram<br /></h1>
-        <p>Instructions go here</p>
+        <p>To contribute a system to expand the phase diagram, you will need to have the following:</p>
+        <p>1. Files of the format "system_name_exp_1.csv", "system_name_exp_2.csv", etc., with the first row as
+            "x, y, z" and subsequent rows containing the x, y, z, values of points in the system.</p>
+        <p>2. If the system is not periodic, what is an appropriate radius for the alpha complex to identify the edge points? 
+            This can be identified using this matlab script (TODO)</p>
+        <p>3. (optional) A representative image of the system to add to the legend.</p>
+        <p>4. The way in which you would like to be cited.</p>
+        <p>Send the above information to TODO</p>
         <p>This website was built and maintained by <a href="https://dom-skinner.github.io/">Dominic J. Skinner</a>, using the <a href="https://genieframework.com/">Genie</a> framework </p>
     </div>
 </div>
