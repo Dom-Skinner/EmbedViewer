@@ -212,11 +212,11 @@ export MDSInfo
 
   sed_mvie::R{Dict} = Dict{String,Any}()
   MDS12_data::R{Vector{PlotData}} = [plot_data()]
-  MDS12_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
+  MDS12_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff",xaxis = [PlotLayoutAxis(title = "plot loading...")])
   
   
   MDS23_data::R{Vector{PlotData}} = [plot_data()]
-  MDS23_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff")
+  MDS23_layout::R{PlotLayout} = PlotLayout(plot_bgcolor = "#fff",xaxis = [PlotLayoutAxis(title = "plot loading...")])
 
   
   @mixin MDS12_data::PlotlyEvents
