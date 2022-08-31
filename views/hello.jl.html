@@ -3,16 +3,16 @@
 </header>
 <div class="row">
     <div class="col col-12 col-sm">
-        <p>Here, we present an interactive topological phase diagram of multicellular systems,
-            where the pairwise topological distance matrix between systems is embedded into Euclidean space with multidimensional scaling (MDS).
-            The topological distance computation relies only on local structure contained in the Delaunay
-            tessellations of a 3D point cloud, whether the points come from particle centroids of a colloidal
-            packing or cell nuclei in a tissue. Details of the distance and research are available in
-            <a href="todo" class="bold-text">Skinner, Jeckel, Martin, Drescher, and Dunkel arXiv (2022)</a>
+        <p>This interactive topological phase diagram shows a 3D Euclidean embedding of the pairwise topological 
+            distance matrix between various biological and physical systems, using multidimensional scaling (MDS). 
+            The topological distance computation relies only on local structural information contained in the 
+            Delaunay tessellations of 3D point clouds, which can represent particle centroids of a colloidal 
+            packing or nuclei position in tissues or cells in bacterial biofilms. Details of the distance definition 
+            and algorithms are described in <a href="coming_soon" class="bold-text">Skinner, Jeckel, Martin, Drescher, and Dunkel arXiv (2022)</a>
         </p>
         <p>Select systems from the table below to explore different parts of the phase diagram.
             For every new selection the MDS embedding is recalculated. To contribute and help expand the phase
-            diagram, see instructions below.</p>
+            diagram, please see instructions below.</p>
     </div>
 </div>
 <div class="row">
@@ -41,15 +41,14 @@
     <div class="col col-6 col-sm">
         <p><img src="/img/Legend.png" width="100%" height="auto" alt="Legend of systems" ,class="img-responsive" /></p>
         <h1 class="st-header__title text-h3">Contributing to the phase diagram<br /></h1>
-        <p>To contribute a system to expand the phase diagram, you will need to have the following:</p>
+        <p>To contribute a system to expand the phase diagram, you will need to provide the following:</p>
         <p>1. Files of the format &quot;system_name_exp_1.csv&quot;, &quot;system_name_exp_2.csv&quot;, etc., with the first row as
             &quot;x, y, z&quot; and subsequent rows containing the x, y, z, values of points in the system.</p>
-        <p>2. If the system is not periodic, what is an appropriate radius for the alpha complex to identify the edge points?
-            This can be identified using the matlab script at the bottom of this page</p>
+        <p>2. If the system is not periodic, provide  an appropriate radius for the alpha complex to identify the edge points. The matlab script at the bottom of this page can help identify an appropriate radius.</p>
         <p>3. (optional) A representative image of the system to add to the legend.</p>
         <p>4. The way in which you would like to be cited.</p>
-        <p>Send the above information to topological.phase.diagram@gmail.com</p>
-        <p>This website was built and maintained by <a href="https://dom-skinner.github.io/">Dominic J. Skinner</a>, using the <a href="https://genieframework.com/">Genie</a> framework </p>
+        <p>Send the above information to <a href="mailto:topological.phase.diagram@gmail.com">topological.phase.diagram@gmail.com</a></p>
+        <p>This website was built and is maintained by <a href="https://dom-skinner.github.io/">Dominic J. Skinner</a>, using the <a href="https://genieframework.com/">Genie</a> framework </p>
         
     </div>
 </div>
