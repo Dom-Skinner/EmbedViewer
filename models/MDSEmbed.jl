@@ -172,7 +172,7 @@ symbol_dict = Dict("White Matter"=>"diamond",
                   "Fluid foam"=>"diamond-open", 
                   "Snowflake yeast"=>"star")
 
-register_mixin(@__MODULE__)
+#register_mixin(@__MODULE__)
 
 
 const multi_table_options = DataTableOptions(columns = Column(["System name", "Number of samples","Number of points per sample (approximate)","Data source"]))
