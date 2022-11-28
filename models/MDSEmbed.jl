@@ -10,24 +10,27 @@ import Colors
 import ColorSchemes
 
 db_multi = DataFrame()
+
 db_multi[!,"System name"] = ["White Matter", "Telencephalon", "Diencephalon", "Mesencephalon","Metencephalon",
                           "Mylencephalon", "Spinal Cord", "Olfactory Epithelium",  "Hypothalamus",
                          "E. coli", "P. aeruginosa", "S. enterica", "V. cholerae", "Zebrafish Embryo",
                         "D. melongaster", "C. elegans",  "P. mammillata", "Cancer organoid", 
                         "Sphere packing", "1:1:4 ellipsoids", "1:4:4: ellipsoids", "1:2:3: ellipsoids", 
-                        "Polydisperse packing", "Glassy material",  "Diffusion limited aggregation",
-                        "Star positions", "Poisson-Voronoi"]
-db_multi[!,"Number of samples"] = vcat(ones(9),5*ones(4),10,14,ones(3),5*ones(5),3,5,1,5)
-db_multi[!,"Data source"] = vcat(repeat(["Ref [1]"],9),repeat(["Ref [2]"],4), "Ref [3]","Ref [4]","Ref [5]", "Ref [6]", "Ref [7]", repeat(["Simulated with code from Ref [8]"],5), "Ref [9]",  "Generated with code from https://github.com/fogleman/dlaf", "Ref [10]", "Generated for this project")
-db_multi[!,"Number of points per sample (approximate)"] = vcat(5_000,20_000,35_000,12_500,90_000,7_500,150_000,25_000,7_500,18_000*ones(4),14_000,20_000,43_500,3_200,2_100,10_000*ones(5),4096,10_000,110_000,10_000)
+                        "Polydisperse packing","Poisson-Voronoi", "Glassy material","Star positions",  
+                        "Diffusion limited aggregation", "A. thaliana","Polyurethane foam", "Fluid foam", "Snowflake yeast"]
+                        db_multi[!,"Number of samples"] = vcat(ones(9),5*ones(4),10,14,ones(3),5*ones(6),3,1,5,6,1,1,1)
+db_multi[!,"Data source"] = vcat(repeat(["Ref [1]"],9),repeat(["Ref [2]"],4), "Ref [3]","Ref [4]","Ref [5]", "Ref [6]", "Ref [7]", 
+    repeat(["Simulated with code from Ref [8]"],5), "Generated for this project" , "Ref [9]", 
+    "Ref [10]",  "Generated with code from https://github.com/fogleman/dlaf", "Ref [10]", "Ref [11]", "Ref [12]", "Ref [13]")
+db_multi[!,"Number of points per sample (approximate)"] = vcat(5_000,20_000,35_000,12_500,90_000,7_500,150_000,25_000,7_500,18_000*ones(4),14_000,20_000,43_500,3_200,2_100,10_000*ones(6),4096,110_000,10_000,2_000,18_000,21_000,2_000)
 
 #TODO fix zebrafish region numbering
 db_multi[!,"Search word"] = ["zebrafish_region_2","zebrafish_region_3", "zebrafish_region_4","zebrafish_region_5","zebrafish_region_6",
                         "zebrafish_region_7","zebrafish_region_8", "zebrafish_region_9","zebrafish_region_10",
                         "ecoli", "pseudomonas", "salmonella", "vibrio",  "zebrafish_embryo",
                         "fly_embryo","worm",  "ascidian", "Guo_organoid", 
-                         "PackedSpheres", "PackedEllipses", "PackedMandM", "PackedIreg", "PolySpheres", 
-                         "Glassy",  "DLA", "HYGStarDatabase", "PV/PV"]
+                         "PackedSpheres", "PackedEllipses", "PackedMandM", "PackedIreg", "PolySpheres", "PV/PV", 
+                         "Glassy", "HYGStarDatabase",  "DLA",  "Plant","foam", "bubbles", "yeast"]
 
 d_mat = CSV.read(joinpath("data", "total_distance_compute.txt"), DataFrame)
                                         
@@ -125,7 +128,16 @@ color_dict = Dict("cheng_zebrafish_region_2" =>"#A6CEE2",
       "data/motif/DLA/DLA_2.h5"=>"#8E9838", 
       "data/motif/DLA/DLA_3.h5"=>"#8E9838", 
       "data/motif/DLA/DLA_4.h5"=>"#8E9838", 
-      "data/motif/DLA/DLA_5.h5"=>"#8E9838")
+      "data/motif/DLA/DLA_5.h5"=>"#8E9838",
+      "Plant_1"=>"#ED513F",
+      "Plant_2"=>"#ED513F",
+      "Plant_4"=>"#ED513F",
+      "Plant_13"=>"#ED513F",
+      "Plant_15"=>"#ED513F",
+      "Plant_18"=>"#ED513F",
+      "foam"=>"#e21f26",
+      "bubbles"=>"#2179B4",
+      "yeast"=>"#a6cee2")
 
 
 symbol_dict = Dict("White Matter"=>"diamond",
@@ -154,7 +166,11 @@ symbol_dict = Dict("White Matter"=>"diamond",
                   "Glassy material"=>"square-open",  
                   "Diffusion limited aggregation"=>"circle-open",
                   "Star positions"=>"star-open", 
-                  "Poisson-Voronoi"=>"square-open")                  
+                  "Poisson-Voronoi"=>"square-open",
+                  "A. thaliana"=>"triangle-down",
+                  "Polyurethane foam"=>"diamond-open", 
+                  "Fluid foam"=>"diamond-open", 
+                  "Snowflake yeast"=>"star")
 
 register_mixin(@__MODULE__)
 
