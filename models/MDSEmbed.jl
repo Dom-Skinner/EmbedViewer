@@ -21,7 +21,7 @@ db_multi[!,"System name"] = ["White Matter", "Telencephalon", "Diencephalon", "M
                         db_multi[!,"Number of samples"] = vcat(ones(9),5*ones(4),10,14,ones(3),5*ones(6),3,1,5,6,1,1,1)
 db_multi[!,"Data source"] = vcat(repeat(["Ref [1]"],9),repeat(["Ref [2]"],4), "Ref [3]","Ref [4]","Ref [5]", "Ref [6]", "Ref [7]", 
     repeat(["Simulated with code from Ref [8]"],5), "Generated for this project" , "Ref [9]", 
-    "Ref [10]",  "Generated with code from https://github.com/fogleman/dlaf", "Ref [10]", "Ref [11]", "Ref [12]", "Ref [13]")
+    "Ref [10]",  "Generated with code from https://github.com/fogleman/dlaf", "Ref [11]", "Ref [12]", "Ref [13]", "Ref [14]")
 db_multi[!,"Number of points per sample (approximate)"] = vcat(5_000,20_000,35_000,12_500,90_000,7_500,150_000,25_000,7_500,18_000*ones(4),14_000,20_000,43_500,3_200,2_100,10_000*ones(6),4096,110_000,10_000,2_000,18_000,21_000,2_000)
 
 #TODO fix zebrafish region numbering
